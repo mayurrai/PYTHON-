@@ -1,0 +1,13 @@
+from itertools import product
+def special(n):
+    i = 0
+    while True:
+        for j in product(*[[0,9]]*i) or [9]:
+            s = "9"+"".join(map(str,j))
+            if not int(s)%n:
+                return s
+        i+=1
+            
+for _ in range(int(input())):
+    n = int(input())
+    print(special(n))
