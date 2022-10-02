@@ -1,0 +1,21 @@
+def solve(a):
+    s = sum(a)
+    sums = []
+    for i in range(len(a)):
+        t = (sums or [0])[-1] + a[i]
+        if t<=s/2:
+            sums.append(t)
+        else:
+            break
+    sums.append(s)
+    for i in sums:
+        if not s%i:
+            t = i
+            for j in a:
+                t = t or i
+                t-= j
+                if t<0:
+                    break
+            else:
+                yield i
+ 
