@@ -1,0 +1,14 @@
+from collections import namedtuple
+
+students = int(input())
+cols_name = input().split()
+cols = namedtuple('col', cols_name)
+total_marks = 0
+
+for student in range(students):
+    student_details = input().split()
+    rows = cols(ID=student_details[cols_name.index('ID')], MARKS=student_details[cols_name.index('MARKS')],
+                NAME=student_details[cols_name.index('NAME')], CLASS=student_details[cols_name.index('CLASS')])
+    total_marks += int(rows.MARKS)
+
+print("{:0.2f}".format(total_marks/students))
