@@ -1,0 +1,15 @@
+from collections import Counter
+
+n = int(input())
+list1 = list(input().split())
+dic1 = dict(Counter(list1))
+cust = int(input())
+
+total = 0
+for i in range(cust):
+    size, price = input().split()
+    if size in dic1.keys():
+        if dic1[size] != 0:
+            dic1[size] -=1
+            total+=int(price)  
+print(total)
