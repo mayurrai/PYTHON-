@@ -1,0 +1,5 @@
+def merge_the_tools(string, k):
+    # your code goes here
+    for part in zip(*[iter(string)] * k):
+        a = dict()
+        print(''.join([ a.setdefault(c, c) for c in part if c not in a ]))
