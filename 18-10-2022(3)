@@ -1,0 +1,27 @@
+import re
+def repeats(card_number):
+    if "-" in card_number:
+        card_number = card_number.replace("-", "")
+    char = card_number[0]
+    repetitions = 0
+    for number in card_number:
+        if number == char:
+            repetitions += 1
+        else:
+            repetitions = 0
+            char = number
+        if repetitions >= 3:
+            return True
+    return False
+def check_card(card_number):
+    if repeats(card_number):
+        return False
+    regex = re.search("^[4-6]\d{3}(-?\d{4}){3}$", card_number)
+    return True if regex else False
+if __name__ == "__main__":
+    n = int(input())
+    cards = []
+    for _ in range(n):
+        cards.append(input())
+    card_validation = ["Valid" if check_card(card_number) else "Invalid" for card_number in cards]
+    print("\n".join(card_validation))
