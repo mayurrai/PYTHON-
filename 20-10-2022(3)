@@ -1,0 +1,11 @@
+data_point = 90.25 / 100  # convert to meter  
+
+mean = 0.675
+
+stdev = 0.065
+
+z_score = (data_point - mean) /stdev
+
+ans=round(z_score, 1)
+
+print(ans)
