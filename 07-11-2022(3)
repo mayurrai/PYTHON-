@@ -1,0 +1,75 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'highestValuePalindrome' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts following parameters:
+#  1. STRING s
+#  2. INTEGER n
+#  3. INTEGER k
+#
+
+def highestValuePalindrome(s, n, k):
+    # Write your code here
+    if(n==1 and k>=1):
+        return '9'
+    st=[]
+    s=list(map(str,s))
+    st=list(map(str,s))
+    i=0
+    j=n-1
+    while i<j:
+        if st[i]!=st[j]:
+            st[i]=max(st[i],st[j])
+            st[j]=max(st[i],st[j])
+            k-=1
+        i+=1
+        j-=1
+    i=0
+    j=n-1
+    #return "".join(st)
+    while k>0 and i<=j:
+        #print(k)
+        if st[i]=='9' and st[j]=='9':
+            pass
+        elif ((st[i]==s[i] and st[j]==s[j]) and k>=2):
+            st[i],st[j]='9','9'
+            k-=2
+
+        elif (st[i]==s[i] and st[j]!=s[j]) or (st[i]!=s[i] and st[j]==s[j]):
+            st[i],st[j]='9','9'
+            k-=1
+        elif i==j and k>0:
+            st[i]='9'
+            k-=1
+            
+        i+=1
+        j-=1
+    print(st)
+    if k<0:
+        return str(-1)
+    return "".join(st)
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    first_multiple_input = input().rstrip().split()
+
+    n = int(first_multiple_input[0])
+
+    k = int(first_multiple_input[1])
+
+    s = input()
+
+    result = highestValuePalindrome(s, n, k)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
