@@ -1,0 +1,32 @@
+def ext_gcd(aneek,sayantan):
+    ash = aneek//sayantan
+    champa = aneek - sayantan*ash
+    shreejit = [1,0]
+    while champa!=0:
+        aneek = sayantan
+        sayantan = champa
+        shreejit.append(shreejit[0]-ash*shreejit[1])
+        shreejit = shreejit[1:]
+        ash = aneek//sayantan
+        champa = aneek - sayantan*ash
+    return(shreejit[1])
+
+def inv_mod(xavi,prime):
+    barca = ext_gcd(xavi,prime)
+    if barca < 0:
+        barca+=prime
+    return(barca)
+
+t = int(input())
+for _ in range(t):
+    l = list(map(int,input().strip().split()))
+    a = l[0]
+    b = l[1]
+    p = l[2]
+    if b<0:
+        c = inv_mod(a,p)
+        b = abs(b)
+        ans = pow(c,b,p)
+    else:
+        ans = pow(a,b,p)
+    print(ans)
