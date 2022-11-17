@@ -1,0 +1,18 @@
+# Complete the has_cycle function below.
+
+#
+# For your reference:
+#
+# SinglyLinkedListNode:
+#     int data
+#     SinglyLinkedListNode next
+#
+#
+def has_cycle(llist):
+    hare = llist
+    turtle = llist
+    while hare and hare.next:
+        hare = hare.next.next
+        turtle = turtle.next
+        if turtle == hare: return True
+    return False
