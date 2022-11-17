@@ -1,5 +1,7 @@
 import re
-text=str(input())
-
-for i in re.split("(?<=[.!?\"]) +", text):
-    print(i)
+paragraph = input().strip()
+#print(paragraph)
+pattern = re.compile('(^|(?<=\S{2}[.?!"\'](?=[A-Z]))|(?<=\S{2}[.?!"\']\s{1}(?![a-z]))|(?<=\S{2}[.?!"\']\s{2}(?![a-z])))([\'"][^\'"]*?[^,][\'"]\s(?=[A-Z])|[\'"][^\'"]*?,[\'"].*?(?<=\S{2}[.?!])|[\'"].*?[\'"]\s[a-z].*?(?<=\S{2}[.?!])|[A-Z].*?(?<=\S{2}[.?!]))')
+sentence = pattern.findall(paragraph)
+for s in sentence:
+    print("".join(s))
