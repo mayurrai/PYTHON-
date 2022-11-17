@@ -1,0 +1,5 @@
+import re
+text=str(input())
+
+for i in re.split("(?<=[.!?\"]) +", text):
+    print(i)
