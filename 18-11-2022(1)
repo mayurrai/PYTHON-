@@ -1,0 +1,42 @@
+import math 
+
+n = int(input())
+a = list(map(int, input().split()))
+
+nxt = [0] * (n + 1)
+nxt[n] = n
+for i in range(n - 1, -1, -1):
+    if a[i] <= 1:
+        nxt[i] = i
+    else:
+        nxt[i] = nxt[i + 1]
+
+q = int(input())
+
+LIM = 60
+LOG_LIM = math.log(LIM * 2)
+
+def bounded_pow(a, b):
+    if b * math.log(a) > LOG_LIM:
+        return LIM
+    return min(pow(a, b), LIM)
+
+def query(i, j, mod):
+    if i == j or a[i] <= 1:
+        return a[i] % mod == 0
+    x = a[i]
+    i += 1
+    tmp = nxt[i]
+    j = min(j, tmp)
+    p = a[j]
+    while j > i and p < LIM:
+        j -= 1
+        p = bounded_pow(a[j], p)
+    return pow(x, p, mod) == 0
+
+for _ in range(q):
+    i, j, mod = map(int, input().split())
+    i -= 1
+    j -= 1
+    print('Yes' if query(i, j, mod) else 'No')
+    
