@@ -1,0 +1,61 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'solve' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts following parameters:
+#  1. LONG_INTEGER k
+#  2. LONG_INTEGER n
+#
+
+def atoNmodp(arra,N,p):
+    if N==1:
+        return arra
+    if N&1:
+        newa = atoNmodp(arra,N-1,p)
+        return list(map(lambda x,y: x*y%p, newa, arra))
+    else:
+        newa = atoNmodp(arra,N>>1,p)
+        return list(map(lambda x: x*x%p, newa))
+
+def solve(k, n):
+    
+    allMod = atoNmodp(range(1,100),n,100)
+
+    resMod =0
+    res100 =0
+    kmod100 =k%100
+    for i, num in enumerate(allMod):
+        res100 = res100 + num %100
+        if i+1==kmod100:
+            resMod =res100
+
+    ret = str(((k//100%100) *res100 + resMod) %100)
+    if len(ret) ==1:
+        ret='0'+ret
+    return ret
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(input().strip())
+
+    for t_itr in range(t):
+        first_multiple_input = input().rstrip().split()
+
+        k = int(first_multiple_input[0])
+
+        n = int(first_multiple_input[1])
+
+        result = solve(k, n)
+
+        fptr.write(result + '\n')
+
+    fptr.close()
